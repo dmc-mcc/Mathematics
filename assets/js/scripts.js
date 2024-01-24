@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let button of buttons) {
         button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
-                alert("You clicked submit");
+                checkAnswer();
+                //alert("You clicked submit");
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType)
@@ -35,12 +36,37 @@ function runGame(gameType) {
 
 }
 
+/**
+ * Check the users answer against correct answer
+ */
 function checkAnswer() {
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    let calculatedAnswer = calculateCorrectAnswer();
+    let isCorrect = userAnswer === calculatedAnswer[0];
+
+    if (isCorrect) {
+        alert("Well Done, Correct.");
+    } else {
+        alert( `oh well ..  ${userAnswer} Wrong!!!! the correct answer is ${calculatedAnswer[0]}`)
+    }
 
 }
 
+/**
+ * Read the operands and operator from the DOM
+ * Calculate the answer
+ */
 function calculateCorrectAnswer() {
+    let a = parseInt(document.getElementById("operand1").innerText);
+    let b = parseInt(document.getElementById("operand2").innerText);
+    let operator = document.getElementById("operator").innerText;
 
+    if(operator === "+"){
+        return [a + b, "addition"];
+    } else {
+        alert(`unimplemented operator ${operator}`);
+        throw `unimplemented operator ${operator}, abort.`;
+    }
 }
 
 function incrementScore() {
