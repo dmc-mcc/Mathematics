@@ -17,7 +17,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 })
 
+/**
+ * Main Game Loop
+ */
 function runGame() {
+    let num1 = Math.ceil(Math.random()*25);
+    let num2 = Math.ceil(Math.random()*25);
 
 }
 
