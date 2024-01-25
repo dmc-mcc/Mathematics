@@ -5,7 +5,7 @@ add event listeners
 document.addEventListener("DOMContentLoaded", function () {
     let buttons = document.getElementsByTagName("button");
     for (let button of buttons) {
-        button.addEventListener("click", function () {            
+        button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
                 checkAnswer();
                 //alert("You clicked submit");
@@ -16,22 +16,25 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         })
     }
-    document.getElementById("answer-box").addEventListener("keydown", function(event){
-        if (event.key === "Enter"){
+    document.getElementById("answer-box").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
             checkAnswer();
         }
-    })
-    runGame(calculatedAnswer[1])
-})
+    });
+    runGame("addition");
+    //runGame(calculatedAnswer[1])
+});
 
 /**
  * Main Game Loop
  */
 function runGame(gameType) {
-    
+
+    document.getElementById("answer-box").value = "";
+    document.getElementById("answer-box").focus();
+
     let num1 = Math.ceil(Math.random() * 25);
     let num2 = Math.ceil(Math.random() * 25);
-
 
     if (gameType === "addition") {
         displayAdditionQuestion(num1, num2);
@@ -45,8 +48,7 @@ function runGame(gameType) {
         alert(`unknown game ${gameType}`);
         throw `unknown game ${gameType}. Abort, Abort`;
     }
-    document.getElementById("answer-box").value ="";
-    document.getElementById("answer-box").focus();
+
 }
 
 /**
@@ -63,13 +65,13 @@ function checkAnswer(gameType) {
         alert("Well Done, Correct.");
         incrementScore();
     } else {
-        alert(`Doh! ${userAnswer} ?? Wrong! can you ${operator}? oh well, the correct answer is ${calculatedAnswer[0]}`)
+        alert(`Doh! ${userAnswer} ?? Wrong! can you ${operator} ? oh well, the correct answer is ${calculatedAnswer[0]}`)
         incrementWrongAnswer();
     }
-    document.getElementById("answer-box").value ="";
+    document.getElementById("answer-box").value = "";
     document.getElementById("answer-box").focus();
 
-
+    runGame(calculatedAnswer[1]);
 }
 
 /**
@@ -130,7 +132,7 @@ function displayMultiplyQuestion(op1, op2) {
 }
 
 function displayDivideQuestion(op1, op2) {
-    document.getElementById("operand1").textContent = op1;
+    document.getElementById("operand1").textContent = op1 * op2;
     document.getElementById("operand2").textContent = op2;
     document.getElementById("operator").textContent = '/';
 }
