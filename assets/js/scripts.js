@@ -16,15 +16,22 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         })
     }
-    runGame("addition")
+    document.getElementById("answer-box").addEventListener("keydown", function(event){
+        if (event.key === "Enter"){
+            checkAnswer();
+        }
+    })
+    runGame(calculatedAnswer[1])
 })
 
 /**
  * Main Game Loop
  */
 function runGame(gameType) {
+    
     let num1 = Math.ceil(Math.random() * 25);
     let num2 = Math.ceil(Math.random() * 25);
+
 
     if (gameType === "addition") {
         displayAdditionQuestion(num1, num2);
@@ -38,7 +45,8 @@ function runGame(gameType) {
         alert(`unknown game ${gameType}`);
         throw `unknown game ${gameType}. Abort, Abort`;
     }
-
+    document.getElementById("answer-box").value ="";
+    document.getElementById("answer-box").focus();
 }
 
 /**
@@ -58,6 +66,9 @@ function checkAnswer(gameType) {
         alert(`Doh! ${userAnswer} ?? Wrong! can you ${operator}? oh well, the correct answer is ${calculatedAnswer[0]}`)
         incrementWrongAnswer();
     }
+    document.getElementById("answer-box").value ="";
+    document.getElementById("answer-box").focus();
+
 
 }
 
