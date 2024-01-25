@@ -107,8 +107,8 @@ function displayAdditionQuestion(op1, op2) {
 }
 
 function displaySubtractQuestion(op1, op2) {
-    document.getElementById("operand1").textContent = op1;
-    document.getElementById("operand2").textContent = op2;
+    document.getElementById("operand1").textContent = op1 > op2 ? op1 : op2;
+    document.getElementById("operand2").textContent = op1 > op2 ? op2 : op1;
     document.getElementById("operator").textContent = '-';
 }
 
